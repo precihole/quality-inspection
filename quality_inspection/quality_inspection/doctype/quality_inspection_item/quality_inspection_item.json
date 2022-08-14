@@ -1,0 +1,126 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-08-13 12:03:04.126837",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "qty",
+  "accepted_qty",
+  "received_qty",
+  "type",
+  "reason",
+  "action_to_be_taken",
+  "column_break_9",
+  "details",
+  "uom",
+  "conversion_factor",
+  "hsn_code",
+  "source_warehouse",
+  "target_warehouse"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "fieldname": "accepted_qty",
+   "fieldtype": "Float",
+   "label": "Accepted Qty"
+  },
+  {
+   "fieldname": "received_qty",
+   "fieldtype": "Float",
+   "label": "Received Qty"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nReject\nRework\nDeviation"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reason"
+  },
+  {
+   "fieldname": "action_to_be_taken",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Action To Be Taken",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Small Text",
+   "label": "Details"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "conversion_factor",
+   "fieldtype": "Float",
+   "label": "Conversion Factor"
+  },
+  {
+   "fieldname": "hsn_code",
+   "fieldtype": "Data",
+   "label": "HSN Code"
+  },
+  {
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "label": "Source Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "label": "Target Warehouse",
+   "options": "Warehouse"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-08-13 13:28:12.557072",
+ "modified_by": "Administrator",
+ "module": "Quality Inspection",
+ "name": "Quality Inspection Item",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

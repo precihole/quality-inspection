@@ -1,0 +1,249 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2022-08-13 12:08:14.981363",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "amended_from",
+  "non_conformance_source",
+  "reference_doctype",
+  "reference_no",
+  "project_no",
+  "user_name",
+  "operator_name",
+  "total_received_qty",
+  "total_accepted_qty",
+  "item_code",
+  "column_break_12",
+  "date",
+  "time",
+  "start_date",
+  "end_date",
+  "challan_no",
+  "challan_date",
+  "vendor_source",
+  "machine_list",
+  "shift",
+  "is_final_process",
+  "section_break_22",
+  "item",
+  "section_break_24",
+  "total_rework",
+  "total_scrap",
+  "remarks_for_production_loss",
+  "column_break_28",
+  "cancel_remark",
+  "section_break_30",
+  "upload_file",
+  "attach_c"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "QA Inspection",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series"
+  },
+  {
+   "fieldname": "non_conformance_source",
+   "fieldtype": "Link",
+   "label": "Non Conformance Source",
+   "options": "Non Conformance Source Type"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "Reference Doctype",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No"
+  },
+  {
+   "fieldname": "project_no",
+   "fieldtype": "Data",
+   "label": "Project No"
+  },
+  {
+   "fieldname": "user_name",
+   "fieldtype": "Data",
+   "label": "User Name"
+  },
+  {
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Operator Name"
+  },
+  {
+   "fieldname": "total_received_qty",
+   "fieldtype": "Float",
+   "label": "Total Received Qty"
+  },
+  {
+   "fieldname": "total_accepted_qty",
+   "fieldtype": "Float",
+   "label": "Total Accepted Qty"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Datetime",
+   "label": "Start date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Datetime",
+   "label": "End date"
+  },
+  {
+   "fieldname": "challan_no",
+   "fieldtype": "Data",
+   "label": "Challan No"
+  },
+  {
+   "fieldname": "challan_date",
+   "fieldtype": "Date",
+   "label": "Challan Date"
+  },
+  {
+   "fieldname": "vendor_source",
+   "fieldtype": "Link",
+   "label": "Vendor Source",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "machine_list",
+   "fieldtype": "Link",
+   "label": "Machine List",
+   "options": "Machine"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Select",
+   "label": "Shift",
+   "options": "\n1\n2\n3\nGEN"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_final_process",
+   "fieldtype": "Check",
+   "label": "Is Final Process"
+  },
+  {
+   "fieldname": "section_break_22",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Table",
+   "label": "Item",
+   "options": "Quality Inspection Item"
+  },
+  {
+   "fieldname": "section_break_24",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_rework",
+   "fieldtype": "Float",
+   "label": "Total Rework"
+  },
+  {
+   "fieldname": "total_scrap",
+   "fieldtype": "Float",
+   "label": "Total Scrap"
+  },
+  {
+   "fieldname": "remarks_for_production_loss",
+   "fieldtype": "Text Editor",
+   "label": "Remarks for production loss"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancel_remark",
+   "fieldtype": "Data",
+   "label": "Cancel Remark"
+  },
+  {
+   "fieldname": "section_break_30",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "upload_file",
+   "fieldtype": "HTML",
+   "label": "Upload File"
+  },
+  {
+   "fieldname": "attach_c",
+   "fieldtype": "Attach",
+   "label": "Attach c"
+  },
+  {
+   "default": "Now",
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-08-14 08:03:00.995857",
+ "modified_by": "Administrator",
+ "module": "Quality Inspection",
+ "name": "QA Inspection",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
