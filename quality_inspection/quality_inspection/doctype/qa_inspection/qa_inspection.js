@@ -1,12 +1,10 @@
 // Copyright (c) 2022, Precihole and contributors
 // For license information, please see license.txt
-
 frappe.ui.form.on('QA Inspection',  {
     validate: function(frm,cdt,cdn) {
     if(cur_frm.doc.item !==undefined){
             if (cur_frm.doc.item.length !==0) {
-                var rework=0;
-                var scrap=0;
+                var rework=0,scrap=0,deviation=0;
     
                 for (var i = 0; i < cur_frm.doc.item.length; i++) {
                     var type=cur_frm.doc.item[i].type;
@@ -14,12 +12,16 @@ frappe.ui.form.on('QA Inspection',  {
                     if(type==="Rework"){
                         rework += cur_frm.doc.item[i].qty;
                     }
-                    if(type==="Scrap"){
+                    else if(type==="Reject"){
                         scrap += cur_frm.doc.item[i].qty;
+                    }
+                    else if(type==="Deviation"){
+                        deviation += cur_frm.doc.item[i].qty;
                     }
                 
                 cur_frm.set_value('total_rework',rework );
                 cur_frm.set_value('total_reject',scrap );
+                cur_frm.set_value('total_deviation',deviation);
 
                 
                 }
@@ -28,54 +30,16 @@ frappe.ui.form.on('QA Inspection',  {
           else{
               cur_frm.set_value('total_rework',0 );
               cur_frm.set_value('total_reject',0 );
+              cur_frm.set_value('total_deviation',0);
           }
     }
     //total accepted qty is rej+rew-rec
-    var accepted_val = cur_frm.doc.total_received_qty - cur_frm.doc.total_rework -cur_frm.doc.total_reject ;
+    var accepted_val = cur_frm.doc.total_received_qty - cur_frm.doc.total_rework - cur_frm.doc.total_reject - cur_frm.doc.total_deviation;
+    console.log(accepted_val)
     cur_frm.set_value('total_accepted_qty',accepted_val);
 
     } 
 });
-
-// frappe.ui.form.on('Quality NC Entry Item', {
-// 	qty: function(frm,cdt,cdn) {
-// 		var d = locals[cdt][cdn];
-// 		console.log(d.received_qty-d.qty)
-// 		    d.accepted_qty = d.received_qty-d.qty
-//             cur_frm.refresh_field("item");
-// 	}
-// })
-// frappe.ui.form.on('Quality NC Entry Item', {
-// 	type: function(frm,cdt,cdn) {
-// 		var d = locals[cdt][cdn];
-// 		if(d.type=="Rework"){
-// 		    if(d.source_warehouse=="Stores A197 (Material In) - PSPL" || d.source_warehouse=="Stores A197 - PSPL"){
-// 		        d.target_warehouse = "197 - Stores Not Good - PSPL"
-// 		        cur_frm.refresh_field("item");
-// 		    }
-// 		    else if(d.source_warehouse=="Stores A272 (Material In) - PSPL"){
-// 		        d.target_warehouse = "272 - Stores Not Good - PSPL"
-// 		        cur_frm.refresh_field("item");
-// 		    }
-// 		}
-// 		else if(d.type=="Scrap"){
-// 	        d.target_warehouse = "Scrap - PSPL"   
-// 	        cur_frm.refresh_field("item");
-// 		}
-// 		if(cur_frm.doc.non_conformance_source == "Assembly Component"){
-// 		    if(d.type=="Scrap"){
-// 		        d.source_warehouse = "WIP Assembly - PSPL"
-// 		        d.target_warehouse = "Scrap - PSPL"
-// 		        cur_frm.refresh_field("item");
-// 		    }
-// 		    else if(d.type=="Rework"){
-// 		        d.source_warehouse = "WIP Assembly - PSPL"
-// 		        d.target_warehouse = "272 - Stores Not Good - PSPL"
-// 		        cur_frm.refresh_field("item");
-// 		    }
-// 		}
-// 	}
-// })
 frappe.ui.form.on('Quality Inspection Item', {
 
   item_add: function(frm,cdt,cdn) {
@@ -88,65 +52,7 @@ frappe.ui.form.on('Quality Inspection Item', {
     
  
   }});
-// frappe.ui.form.on('QA Inspection', {
-// 	required_by_date:function(frm) {
-//         var item_child=frm.doc.consumables_items
-        
 
-//         var item_child=frm.doc.consumables_items
-//         for(var i=0;i<item_child.length;i++){
-//             item_child[i].required_by_date = frm.doc.required_by_date
-//             frm.refresh_field("consumables_items");
-//         }
-        
-// 	}
-// });
-//================================Naming Series set here==========================
-// frappe.ui.form.on('QA Inspection','non_conformance_source',function(frm, cdt, cdn){
-// 	if (frm.doc.non_conformance_source == "Incoming") {
-//         frm.set_value("naming_series", "QA-IN2223-.####");
-
-//     }
-//     else if(frm.doc.non_conformance_source == "Machine Shop"){
-//         frm.set_value("naming_series", "QA-MS2223-.####");
-
-//     }
-//     else if(frm.doc.non_conformance_source == "Assembly Component"){
-//         frm.set_value("naming_series", "QA-AC2223-.####");
-
-//     }
-//     else{
-//         frm.set_value("naming_series", "");
-//     }
-
-// });
-
-// //Remove rows when qty in zero
-// frappe.ui.form.on('QA Inspection', {
-// 	on_submit:function(cur_frm) {
-//         var item_child=cur_frm.doc.item
-//         for(var i=0;i<item_child.length;i++){
-//             if(item_child[i].qty == 0){
-//                 console.log(item_child[i].qty)
-//                 cur_frm.get_field("item").grid.grid_rows[i].remove()
-//                 cur_frm.save("Update")
-//             }
-//         }
-// 	}
-// });
-// frappe.ui.form.on('QA Inspection',  {
-//     validate: function(frm) {
-//         var child = frm.doc.item
-//         for(var i=0;i<child.length;i++){
-//             var re = new RegExp('/');
-//             var test = child[i].details
-//             if(test.match(re)) {
-//                 msgprint('you cannot use / in details');
-//                 validated = false;
-//             }
-//         }
-//     } 
-// });
 //========getting issue while amend doc is creating when cancel remark is entered...cancel remak field is copy in amend doc also===========
 frappe.ui.form.on('QA Inspection',  {
     refresh: function(frm) {
@@ -258,13 +164,27 @@ frappe.ui.form.on("QA Inspection", "validate", function(frm){
 
 var project_no = cur_frm.doc.project_no;
     if (project_no){
-        var project_no_validate = new RegExp("(^[A-Z]{1}-[A-Z]{1}[0-9]{2,4})$");
-        if (project_no_validate.test(project_no) === false){
-            frappe.msgprint(__("Project number format is incorrect"));
-            frappe.validated = false;
+        if (cur_frm.doc.reference_doctype=="Work Order"){
+            var project_no_validate = new RegExp("^[0-9]+$");
+            if (project_no_validate.test(project_no) === false){
+                frappe.msgprint(__("Project number format is incorrect"));
+                frappe.validated = false;
+            }
+        }else{
+            var project_no_validate = new RegExp("(^[A-Z]{1}-[A-Z]{1}[0-9]{2,4})$");
+            if (project_no_validate.test(project_no) === false){
+                frappe.msgprint(__("Project number format is incorrect"));
+                frappe.validated = false;
+            }
         }
+        
     }
 
 });
-
-
+// Child table add event add item code if there is item already
+frappe.ui.form.on('Quality Inspection Item', { 
+    item_add(frm, cdt, cdn) { 
+        var c = locals[cdt][cdn];
+        c.item_code=cur_frm.doc.item_code;
+    }
+});
