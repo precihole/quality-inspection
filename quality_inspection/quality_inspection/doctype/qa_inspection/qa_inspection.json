@@ -12,7 +12,7 @@
   "non_conformance_source",
   "reference_doctype",
   "reference_no",
-  "project_no",
+  "project",
   "user_name",
   "operator_name",
   "total_received_qty",
@@ -65,20 +65,11 @@
    "options": "Non Conformance Source Type"
   },
   {
-   "fieldname": "reference_doctype",
-   "fieldtype": "Link",
-   "label": "Reference Doctype",
-   "options": "DocType"
-  },
-  {
+   "depends_on": "eval: in_list([\"WORK ORDER\",\"FOC\",\"PURCHASE ORDER\"], doc.reference_doctype)",
    "fieldname": "reference_no",
    "fieldtype": "Data",
-   "label": "Reference No"
-  },
-  {
-   "fieldname": "project_no",
-   "fieldtype": "Data",
-   "label": "Project No"
+   "label": "Reference No",
+   "mandatory_depends_on": "eval: in_list([\"WORK ORDER\",\"FOC\",\"PURCHASE ORDER\"], doc.reference_doctype)"
   },
   {
    "fieldname": "user_name",
@@ -233,12 +224,27 @@
    "fieldname": "qa_inspection",
    "fieldtype": "Data",
    "label": "QA Inspection"
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Select",
+   "label": "Reference Doctype",
+   "options": "\nPROJECT\nWORK ORDER\nPURCHASE ORDER\nFOC",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.reference_doctype ==\"PROJECT\"",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "mandatory_depends_on": "eval:doc.reference_doctype ==\"PROJECT\"",
+   "options": "Project"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-18 14:25:19.037734",
+ "modified": "2022-09-18 15:39:05.495687",
  "modified_by": "Administrator",
  "module": "Quality Inspection",
  "name": "QA Inspection",

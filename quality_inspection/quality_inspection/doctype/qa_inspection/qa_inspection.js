@@ -68,18 +68,19 @@ frappe.ui.form.on("QA Inspection", "validate", function(frm) {
         frappe.validated = false;
     }
 });
-frappe.ui.form.on('QA Inspection',  {
-    vibrate: function(frm) {
-// To check that is vibration API supported
-if (navigator.vibrate) {
-    window.navigator.vibrate(200);
-}
-    } 
-});
+// frappe.ui.form.on('QA Inspection',  {
+//     vibrate: function(frm) {
+// // To check that is vibration API supported
+// if (navigator.vibrate) {
+//     window.navigator.vibrate(200);
+// }
+//     } 
+// });
 
 // ADDING CUSSTOM BUTTON AND ROUTING  
 frappe.ui.form.on('QA Inspection',  {
     refresh: function(frm) {
+        cur_frm.set_value("user_name",frappe.session.user_fullname)
     	cur_frm.add_custom_button(__("Create Non Conformance"), function() {
             frappe.route_options = {
         	    'refrence__no': frm.doc.name
@@ -164,13 +165,13 @@ frappe.ui.form.on("QA Inspection", "validate", function(frm){
 
 var project_no = cur_frm.doc.project_no;
     if (project_no){
-        if (cur_frm.doc.reference_doctype=="Work Order"){
+        if (cur_frm.doc.reference_doctype=="WORK ORDER"){
             var project_no_validate = new RegExp("^[0-9]+$");
             if (project_no_validate.test(project_no) === false){
                 frappe.msgprint(__("Project number format is incorrect"));
                 frappe.validated = false;
             }
-        }else{
+        }else if (cur_frm.doc.reference_doctype == "PROJECT"){
             var project_no_validate = new RegExp("(^[A-Z]{1}-[A-Z]{1}[0-9]{2,4})$");
             if (project_no_validate.test(project_no) === false){
                 frappe.msgprint(__("Project number format is incorrect"));
