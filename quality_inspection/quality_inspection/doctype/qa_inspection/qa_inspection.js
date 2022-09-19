@@ -32,7 +32,9 @@ frappe.ui.form.on("QA Inspection", "validate", function(frm) {
 // ADDING CUSSTOM BUTTON AND ROUTING  
 frappe.ui.form.on('QA Inspection',  {
     refresh: function(frm) {
-        cur_frm.set_value("user_name",frappe.session.user_fullname)
+        if(self.docstatus == 0 || self.__islocal){
+            cur_frm.set_value("user_name",frappe.session.user_fullname)
+        }
     	cur_frm.add_custom_button(__("Create Non Conformance"), function() {
             frappe.route_options = {
         	    'refrence__no': frm.doc.name
