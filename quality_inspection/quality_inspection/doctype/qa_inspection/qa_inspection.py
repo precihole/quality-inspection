@@ -3,21 +3,21 @@
 
 import frappe
 from frappe.model.document import Document
-
+from frappe import _
 class QAInspection(Document):
 	def before_save(self):
 		rework = 0
 		reject = 0
 		deviation = 0
 		if self.item:	
-			for child in self.item:
+			for child in self.get("item"):
 				if child.type == "Rework":
 					if not child.action_to_be_taken:
 						frappe.throw("Action to be taken is Mandatory")
 				# if deviation then remark is mandatory
 				elif child.type == "Deviation":
 					if not child.remark:
-						frappe.throw("Remark is Mandatory")
+						frappe.throw(_("Remark is Mandatory for Deviation in Row : {0} for Item : {1}").format(child.idx,child.item_code,child.qty))
 				# getting the total of rework/reject/deviation calulated here
 				if child.type:
 					if child.type == "Rework":
@@ -33,7 +33,7 @@ class QAInspection(Document):
 
 	def before_submit(self):
 		if self.item:
-			for item in self.item:
+			for item in self.get("item"):
 				if item.qty == 0:
 					item.delete()
 		#as per req added date is save when submitting doc
