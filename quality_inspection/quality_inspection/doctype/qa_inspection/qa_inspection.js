@@ -1,45 +1,6 @@
 // Copyright (c) 2022, Precihole and contributors
 // For license information, please see license.txt
-frappe.ui.form.on('QA Inspection',  {
-    validate: function(frm,cdt,cdn) {
-    if(cur_frm.doc.item !==undefined){
-            if (cur_frm.doc.item.length !==0) {
-                var rework=0,scrap=0,deviation=0;
-    
-                for (var i = 0; i < cur_frm.doc.item.length; i++) {
-                    var type=cur_frm.doc.item[i].type;
-                   
-                    if(type==="Rework"){
-                        rework += cur_frm.doc.item[i].qty;
-                    }
-                    else if(type==="Reject"){
-                        scrap += cur_frm.doc.item[i].qty;
-                    }
-                    else if(type==="Deviation"){
-                        deviation += cur_frm.doc.item[i].qty;
-                    }
-                
-                cur_frm.set_value('total_rework',rework );
-                cur_frm.set_value('total_reject',scrap );
-                cur_frm.set_value('total_deviation',deviation);
-
-                
-                }
-    
-          }
-          else{
-              cur_frm.set_value('total_rework',0 );
-              cur_frm.set_value('total_reject',0 );
-              cur_frm.set_value('total_deviation',0);
-          }
-    }
-    //total accepted qty is rej+rew-rec
-    var accepted_val = cur_frm.doc.total_received_qty - cur_frm.doc.total_rework - cur_frm.doc.total_reject - cur_frm.doc.total_deviation;
-    console.log(accepted_val)
-    cur_frm.set_value('total_accepted_qty',accepted_val);
-
-    } 
-});
+//
 frappe.ui.form.on('Quality Inspection Item', {
 
   item_add: function(frm,cdt,cdn) {
@@ -68,15 +29,6 @@ frappe.ui.form.on("QA Inspection", "validate", function(frm) {
         frappe.validated = false;
     }
 });
-// frappe.ui.form.on('QA Inspection',  {
-//     vibrate: function(frm) {
-// // To check that is vibration API supported
-// if (navigator.vibrate) {
-//     window.navigator.vibrate(200);
-// }
-//     } 
-// });
-
 // ADDING CUSSTOM BUTTON AND ROUTING  
 frappe.ui.form.on('QA Inspection',  {
     refresh: function(frm) {

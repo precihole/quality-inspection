@@ -74,7 +74,8 @@
   {
    "fieldname": "user_name",
    "fieldtype": "Data",
-   "label": "User Name"
+   "label": "User Name",
+   "read_only": 1
   },
   {
    "fieldname": "operator_name",
@@ -92,7 +93,8 @@
    "fieldname": "total_accepted_qty",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Total Accepted Qty"
+   "label": "Total Accepted Qty",
+   "read_only": 1
   },
   {
    "fieldname": "item_code",
@@ -129,6 +131,7 @@
    "fieldname": "vendor_source",
    "fieldtype": "Link",
    "label": "Vendor Source",
+   "mandatory_depends_on": "eval:doc.non_conformance_source == \"Vendor\"",
    "options": "Supplier"
   },
   {
@@ -168,7 +171,8 @@
   {
    "fieldname": "total_rework",
    "fieldtype": "Float",
-   "label": "Total Rework"
+   "label": "Total Rework Qty",
+   "read_only": 1
   },
   {
    "fieldname": "remarks_for_production_loss",
@@ -180,6 +184,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:!doc.docstatus == 0",
    "fieldname": "cancel_remark",
    "fieldtype": "Data",
    "label": "Cancel Remark"
@@ -213,17 +218,19 @@
   {
    "fieldname": "total_reject",
    "fieldtype": "Float",
-   "label": "Total Reject"
+   "label": "Total Reject Qty",
+   "read_only": 1
   },
   {
    "fieldname": "total_deviation",
    "fieldtype": "Float",
-   "label": "Total Deviation"
+   "label": "Total Deviation Qty",
+   "read_only": 1
   },
   {
    "fieldname": "qa_inspection",
    "fieldtype": "Data",
-   "label": "QA Inspection"
+   "label": "QA Inspection Report No."
   },
   {
    "fieldname": "reference_doctype",
@@ -244,7 +251,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-18 15:39:05.495687",
+ "modified": "2022-09-19 14:31:16.511765",
  "modified_by": "Administrator",
  "module": "Quality Inspection",
  "name": "QA Inspection",

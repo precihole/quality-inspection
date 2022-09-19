@@ -1,0 +1,208 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow",
+  "document_type": "QA Inspection",
+  "is_active": 1,
+  "modified": "2022-09-19 13:59:11.749709",
+  "name": "QA Inspection",
+  "override_status": 0,
+  "send_email_alert": 0,
+  "states": [
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Draft",
+    "update_field": "workflow_state",
+    "update_value": "Draft"
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approval Pending",
+    "update_field": "workflow_state",
+    "update_value": "Approval Pending"
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Rejected",
+    "update_field": "workflow_state",
+    "update_value": "Rejected"
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "1",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Submitted",
+    "update_field": "workflow_state",
+    "update_value": "Submitted"
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "2",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Cancelled",
+    "update_field": "workflow_state",
+    "update_value": "Cancelled"
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Design Approval Pending",
+    "update_field": "workflow_state",
+    "update_value": "Design Approval Pending"
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "QA Inspection",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved",
+    "update_field": "workflow_state",
+    "update_value": "Approved"
+   }
+  ],
+  "transitions": [
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "doc.total_received_qty != doc.total_accepted_qty",
+    "next_state": "Approval Pending",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "doc.total_received_qty == doc.total_accepted_qty",
+    "next_state": "Submitted",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "PSPL - Quality Workflow Manager",
+    "condition": "doc.total_deviation == 0",
+    "next_state": "Submitted",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approval Pending"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "doc.total_deviation > 0",
+    "next_state": "Design Approval Pending",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approval Pending"
+   },
+   {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "PSPL - Quality Workflow Manager",
+    "condition": "doc.total_deviation == 0",
+    "next_state": "Rejected",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approval Pending"
+   },
+   {
+    "action": "Cancel",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "",
+    "next_state": "Cancelled",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Submitted"
+   },
+   {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "",
+    "next_state": "Rejected",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "doc.total_deviation > 0",
+    "next_state": "Submitted",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Design Approval Pending"
+   },
+   {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": "doc.total_deviation > 0",
+    "next_state": "Rejected",
+    "parent": "QA Inspection",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Design Approval Pending"
+   }
+  ],
+  "workflow_name": "QA Inspection",
+  "workflow_state_field": "workflow_state"
+ }
+]

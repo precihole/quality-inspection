@@ -193,3 +193,7 @@ app_license = "MIT"
 # Recommended only for DocTypes which have limited documents with untranslated names
 # For example: Role, Gender, etc.
 # translated_search_doctypes = []
+fixtures = [
+    {"dt": "Workspace", "filters": [["name", "=", "Quality Control"]]},
+    {"dt": "Workflow", "filters": [["name", "=", "QA Inspection"]]},
+]
