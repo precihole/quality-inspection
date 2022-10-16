@@ -30,6 +30,9 @@ class QAInspection(Document):
 		self.total_reject = reject
 		self.total_deviation = deviation
 		self.total_accepted_qty = self.total_received_qty - self.total_deviation - self.total_reject - self.total_rework
+		if self.workflow_state == "Design Approval Pending":
+			if not self.approved_by_qa_dept:
+				self.approved_by_qa_dept = frappe.session.user 
 
 	def before_submit(self):
 		if self.item:
@@ -38,6 +41,13 @@ class QAInspection(Document):
 					item.delete()
 		#as per req added date is save when submitting doc
 		self.date = frappe.utils.now()
+		if self.workflow_state == "Submitted":
+			if self.approved_by_qa_dept:
+				if not self.approved_by_design_dept:
+					self.approved_by_design_dept = frappe.session.user
+			if not self.approved_by_qa_dept:
+				self.approved_by_qa_dept = frappe.session.user
+			
 	# ramark validation
 	def before_cancel(self):
 		if not self.cancel_remark:

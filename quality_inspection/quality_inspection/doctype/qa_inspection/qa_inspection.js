@@ -17,7 +17,7 @@ frappe.ui.form.on('Quality Inspection Item', {
 //========getting issue while amend doc is creating when cancel remark is entered...cancel remak field is copy in amend doc also===========
 frappe.ui.form.on('QA Inspection',  {
     refresh: function(frm) {
-        if(frm.doc.amended_from){
+        if(frm.doc.__islocal && frm.doc.amended_from){
             frm.set_value("cancel_remark","")
         }
     } 
@@ -32,7 +32,7 @@ frappe.ui.form.on("QA Inspection", "validate", function(frm) {
 // ADDING CUSSTOM BUTTON AND ROUTING  
 frappe.ui.form.on('QA Inspection',  {
     refresh: function(frm) {
-        if(self.docstatus == 0 || self.__islocal){
+        if(frm.doc.docstatus == 0 || frm.doc.__islocal){
             cur_frm.set_value("user_name",frappe.session.user_fullname)
         }
     	cur_frm.add_custom_button(__("Create Non Conformance"), function() {
@@ -143,3 +143,17 @@ frappe.ui.form.on('Quality Inspection Item', {
         c.item_code=cur_frm.doc.item_code;
     }
 });
+// for setting aprroved by department
+// frappe.ui.form.on("Expense Claim", {
+//     before_workflow_action: (frm) => {
+//         console.log(frm.selected_workflow_action);
+//         if (
+//             frm.doc.workflow_state === "Advance Validated By Finance" &&
+//             frm.selected_workflow_action === "Approve Advance Request" &&
+//             frm.doc.checkbox_m == 1
+//         ) {
+//             frappe.throw("Please check the 'approval' checkbox before approving");
+//             frappe.validated = false;
+//         }
+//     },
+// });
