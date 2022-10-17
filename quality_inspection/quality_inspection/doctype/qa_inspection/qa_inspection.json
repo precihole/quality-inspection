@@ -254,19 +254,21 @@
    "fieldname": "approved_by_qa_dept",
    "fieldtype": "Link",
    "label": "Approved by QA Dept",
-   "options": "User"
+   "options": "User",
+   "read_only": 1
   },
   {
    "fieldname": "approved_by_design_dept",
    "fieldtype": "Link",
    "label": "Approved by Design Dept",
-   "options": "User"
+   "options": "User",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-16 11:26:15.487990",
+ "modified": "2022-10-17 12:48:00.096207",
  "modified_by": "Administrator",
  "module": "Quality Inspection",
  "name": "QA Inspection",
