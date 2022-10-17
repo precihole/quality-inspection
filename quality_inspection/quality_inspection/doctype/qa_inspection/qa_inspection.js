@@ -50,7 +50,7 @@ frappe.ui.form.on('QA Inspection', {
     if(!cur_frm.doc.__islocal){
         frm.set_df_property("upload_file", "options", `
             <div style="border: 1px solid rgb(201, 0, 1); overflow: hidden; margin: 15px auto; max-width: 900px;">
-<iframe scrolling="no" src="https://script.google.com/a/macros/preciholesports.com/s/AKfycbzKzTjQc58bzcjWssH87ZwOOuTk9uz4iog9leA1qYrdN7wznKk/exec?docType=`+cur_frm.doc.doctype+`&formId=`+ cur_frm.doc.name +`" style="border: 0px none;height: 450px; width: 900px;">
+<iframe scrolling="no" src="https://script.google.com/macros/s/AKfycbzYTJSQSjZdp6Ls-7W79XL83Nhs7hBlXbmy1PUFWX6iX0GisaaL/exec?docType=`+cur_frm.doc.doctype+`&formId=`+ cur_frm.doc.name +`" style="border: 0px none;height: 450px; width: 900px;">
 </iframe>
 </div>
             `); 
