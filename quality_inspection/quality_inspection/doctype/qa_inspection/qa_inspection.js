@@ -143,17 +143,4 @@ frappe.ui.form.on('Quality Inspection Item', {
         c.item_code=cur_frm.doc.item_code;
     }
 });
-// for setting aprroved by department
-// frappe.ui.form.on("Expense Claim", {
-//     before_workflow_action: (frm) => {
-//         console.log(frm.selected_workflow_action);
-//         if (
-//             frm.doc.workflow_state === "Advance Validated By Finance" &&
-//             frm.selected_workflow_action === "Approve Advance Request" &&
-//             frm.doc.checkbox_m == 1
-//         ) {
-//             frappe.throw("Please check the 'approval' checkbox before approving");
-//             frappe.validated = false;
-//         }
-//     },
-// });
+

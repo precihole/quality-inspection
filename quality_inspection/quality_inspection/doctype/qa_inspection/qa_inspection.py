@@ -30,6 +30,7 @@ class QAInspection(Document):
 		self.total_reject = reject
 		self.total_deviation = deviation
 		self.total_accepted_qty = self.total_received_qty - self.total_deviation - self.total_reject - self.total_rework
+		# for setting aprroved by department
 		if self.workflow_state == "Design Approval Pending":
 			if not self.approved_by_qa_dept:
 				self.approved_by_qa_dept = frappe.session.user 
@@ -41,6 +42,7 @@ class QAInspection(Document):
 					item.delete()
 		#as per req added date is save when submitting doc
 		self.date = frappe.utils.now()
+		# for setting aprroved by department
 		if self.workflow_state == "Submitted":
 			if self.approved_by_qa_dept:
 				if not self.approved_by_design_dept:
