@@ -53,7 +53,6 @@ frappe.ui.form.on('QA Inspection', {
 <iframe scrolling="no" src="https://script.google.com/a/macros/precihole.com/s/AKfycbwc-QPzQw-Qc9bbWPpGrBd1aeiZ849TcU9ucTUCmLLlDJbUZam32YXcVkjL3AWhKp8NOg/exec?docType=`+cur_frm.doc.doctype+`&formId=`+ cur_frm.doc.name +`" style="border: 0px none;height: 450px; width: 900px;">
 </iframe>
 </div>
-
             `); 
         }
         else{
@@ -62,8 +61,7 @@ frappe.ui.form.on('QA Inspection', {
             frm.set_df_property("upload_file","hidden",1);
         
         }
-    }
-        
+    }     
 });
 //Filtering machine list
 frappe.ui.form.on('QA Inspection', {
