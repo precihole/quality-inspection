@@ -6,4 +6,4 @@ For managing the quality of product
 
 MIT
 
-## Not is use as of now
+## Not in use as of now
