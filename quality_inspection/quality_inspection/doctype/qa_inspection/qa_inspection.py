@@ -35,11 +35,44 @@ class QAInspection(Document):
 			if not self.approved_by_qa_dept:
 				self.approved_by_qa_dept = frappe.session.user 
 
+		
+
+		if not self.item or len(self.item) == 0:
+			pass
+		elif not self.custom_accepted_item or len(self.custom_accepted_item) == 0:
+			frappe.msgprint(_('The "Custom Accepted Item" table is empty. No changes made.'))
+		else:
+			item_quantities = {}
+
+			
+			for row in self.item:
+				item_code = row.get("item_code")
+				qty = row.get("qty", 0) or 0  
+				if item_code:
+					item_quantities[item_code] = item_quantities.get(item_code, 0) + qty
+
+			updated = False
+			for row in self.custom_accepted_item:
+				item_code = row.get("item_code")
+				reject_qty = item_quantities.get(item_code, 0) if item_code else 0
+				row.reject_qty = reject_qty
+
+			
+				received_qty = row.get("received_qty", 0) or 0  
+				row.accepted_qty = received_qty - reject_qty
+				updated = True
+
+			if updated:
+				pass
+			else:
+				frappe.msgprint(_('No matching items found to update the rejected and accepted quantities.'))
+
+
 	def before_submit(self):
 		if self.item:
 			for item in self.get("item"):
 				if item.qty == 0:
-					item.delete()
+					item.delete(ignore_permissions=True)
 		#as per req added date is save when submitting doc
 		self.date = frappe.utils.now()
 		# for setting aprroved by department
@@ -54,3 +87,6 @@ class QAInspection(Document):
 	def before_cancel(self):
 		if not self.cancel_remark:
 			frappe.throw("Remark is Manadatory Before Cancel")
+
+
+
