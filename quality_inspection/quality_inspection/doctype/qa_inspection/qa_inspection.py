@@ -16,7 +16,7 @@ class QAInspection(Document):
 						frappe.throw("Action to be taken is Mandatory")
 				# if deviation then remark is mandatory
 				elif child.type == "Deviation":
-					if not child.remark:
+					if not child.details:
 						frappe.throw(_("Remark is Mandatory for Deviation in Row : {0} for Item : {1}").format(child.idx,child.item_code,child.qty))
 				# getting the total of rework/reject/deviation calulated here
 				if child.type:
